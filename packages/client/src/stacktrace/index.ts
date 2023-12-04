@@ -1,18 +1,10 @@
 import ErrorStackParser from 'error-stack-parser';
 import { getCodeSnippet } from './fileReader';
 import { Flare } from '../types';
-import { flare } from '..';
-import { assert } from '../util';
 
 export function createStackTrace(error: Error): Promise<Array<Flare.StackFrame>> {
     return new Promise(resolve => {
         if (!hasStack(error)) {
-            assert(false, "Couldn't generate stacktrace of below error:", flare.debug);
-
-            if (flare.debug) {
-                console.error(error);
-            }
-
             return resolve([
                 {
                     line_number: 0,
